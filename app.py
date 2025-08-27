@@ -64,7 +64,7 @@ def to_excel_bytes(dfs: dict) -> bytes:
     return out.getvalue()
 
 def set_devanagari_font():
-    font_path = r'C:\Users\Admin\Downloads\devanagari-plain9190-122439-pm\Devanagari Plain9190 122439 PM\Devanagari Plain9190 122439 PM.ttf'
+    font_path = os.path.join("fonts", "NotoSansDevanagari-Regular.ttf")
     if os.path.exists(font_path):
         fm.fontManager.addfont(font_path)
         devanagari_font = FontProperties(fname=font_path)
@@ -72,8 +72,9 @@ def set_devanagari_font():
         plt.rcParams["axes.unicode_minus"] = False
         return devanagari_font
     else:
-        st.warning("Devanagari font file not found!")
+        # Just silently ignore instead of warning
         return None
+
 
 devanagari_font = set_devanagari_font()
 
